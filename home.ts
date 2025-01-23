@@ -30,7 +30,7 @@ export class SignatureMultiPage {
       setTimeout(() => {  this.setUpSig(); }, 250);
   }
 
-  // setup cnavas
+  // setup canvas
   setUpSig() {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width();
@@ -79,6 +79,6 @@ export class SignatureMultiPage {
     let obj= { signatureImg: signatureImg }
     this.myDismiss(obj);
   }
-
+  // mobile close window
   async myDismiss(obj:any) { await this.modalController.dismiss(obj); }
 }
