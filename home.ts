@@ -30,6 +30,7 @@ export class SignatureMultiPage {
       setTimeout(() => {  this.setUpSig(); }, 250);
   }
 
+  // setup cnavas
   setUpSig() {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width();
@@ -40,6 +41,7 @@ export class SignatureMultiPage {
     background.onload = () => { ctx.drawImage(background,0,0, this.canvasElement.width, this.canvasElement.height) };
   }
 
+  // // listen for mouse starting drawing
   startDrawing(ev: any) {
     this.showSigButton = true;
     this.drawing = true;
@@ -47,7 +49,7 @@ export class SignatureMultiPage {
     this.saveX = ev.touches[0].pageX - canvasPosition.x;
     this.saveY = ev.touches[0].pageY - canvasPosition.y;
   }
-
+  // listen for mouse movement
   moved(ev: any) {
     if (!this.drawing) return;
     var canvasPosition = this.canvasElement.getBoundingClientRect();
@@ -65,11 +67,13 @@ export class SignatureMultiPage {
     this.saveX = currentX;
     this.saveY = currentY;
   }
-
+   // stop drawing
   endDrawing() { this.drawing = false }
 
-  clearSig() { this.setUpSig(); this.showSigButton = false; }
+  // setup canvas
+  clearSig() { this.setUpSig()  }
 
+  // save signature
   saveSig() {
     let signatureImg = this.canvasElement.toDataURL();
     let obj= { signatureImg: signatureImg }
