@@ -27,9 +27,18 @@ export class SignatureMultiPage {
     private navParams: NavParams,
     private modalController: ModalController, ) {
       this.showSigButton = false;
-      setTimeout(() => {  this.drawOnSig(); }, 250);
+      setTimeout(() => {  this.setUpSig(); }, 250);
   }
 
+  setUpSig() {
+    this.canvasElement = this.canvas.nativeElement;
+    this.canvasElement.width = this.platform.width();
+    if ( this.platformAndroid == true ) { this.canvasElement.height = 250; };
+    if ( this.platformAndroid == false ) { this.canvasElement.height = 100; };
+    let background = new Image();
+    let ctx = this.canvasElement.getContext('2d');
+    background.onload = () => { ctx.drawImage(background,0,0, this.canvasElement.width, this.canvasElement.height) };
+  }
 
   startDrawing(ev: any) {
     this.showSigButton = true;
@@ -59,17 +68,7 @@ export class SignatureMultiPage {
 
   endDrawing() { this.drawing = false }
 
-  drawOnSig() {
-    this.canvasElement = this.canvas.nativeElement;
-    this.canvasElement.width = this.platform.width();
-    if ( this.platformAndroid == true ) { this.canvasElement.height = 250; };
-    if ( this.platformAndroid == false ) { this.canvasElement.height = 100; };
-    let background = new Image();
-    let ctx = this.canvasElement.getContext('2d');
-    background.onload = () => { ctx.drawImage(background,0,0, this.canvasElement.width, this.canvasElement.height) };
-  }
-
-  clearSig() { this.drawOnSig(); this.showSigButton = false; }
+  clearSig() { this.setUpSig(); this.showSigButton = false; }
 
   saveSig() {
     let signatureImg = this.canvasElement.toDataURL();
