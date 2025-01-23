@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalController, Platform, NavParams } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-signature-multi',
@@ -9,10 +9,6 @@ import { ModalController, Platform, NavParams } from '@ionic/angular';
 export class SignatureMultiPage {
   @ViewChild('imageCanvas', { static: false }) public canvas: any;
   canvasElement: any;
-  platformAndroid: boolean;
-  online: boolean;
-  formID: any;
-  sectionID: any;
   drawing = false;
   saveX: number;
   saveY: number;
@@ -24,7 +20,6 @@ export class SignatureMultiPage {
 
   constructor(
     private platform: Platform,
-    private navParams: NavParams,
     private modalController: ModalController, ) {
       this.showSigButton = false;
       setTimeout(() => {  this.setUpSig(); }, 250);
@@ -34,8 +29,7 @@ export class SignatureMultiPage {
   setUpSig() {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.platform.width();
-    if ( this.platformAndroid == true ) { this.canvasElement.height = 250; };
-    if ( this.platformAndroid == false ) { this.canvasElement.height = 100; };
+    this.canvasElement.height = 100;
     let background = new Image();
     let ctx = this.canvasElement.getContext('2d');
     background.onload = () => { ctx.drawImage(background,0,0, this.canvasElement.width, this.canvasElement.height) };
