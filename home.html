@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Sig Demo</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="myDismiss('')">
+          <ion-icon name="close-circle-outline" slot="icon-only">
+          </ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content scroll-y="false">
+    <canvas #imageCanvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)" (touchend)="endDrawing()"> </canvas>
+    <div class ="linkButtons">
+      <ion-button color="danger" size="large" fill="outline" (click)="myDismiss('')">
+        <ion-icon slot="icon-only" color="danger"  name="stop-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="warning" size="large" fill="outline" (click)="clearSig()">
+        <ion-icon slot="icon-only" name="arrow-undo-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="blackgreen" size="large" fill="outline" (click)="saveSig()" *ngIf="showSigButton">
+        <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+      </ion-button>
+      </div>
+  </ion-content>
